@@ -1,5 +1,6 @@
 package kbai;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class NaiveAgent extends Agent{
@@ -14,11 +15,15 @@ public class NaiveAgent extends Agent{
 	
 	public int nextMove(int[][] board)
 	{
-		for(int j=0; j<board.length; j++)
+		ArrayList<Integer> open = new ArrayList<Integer>();
+		for(int j=0; j<board[0].length; j++)
 		{
-			for(int i=0; i<board[0].length; i++)
+			for(int i=0; i<board.length; i++)
 			{
-				
+				if(board[j][i] != 0)
+				{
+					open.add(0);
+				}
 			}
 		}
 		return rand.nextInt(9);
