@@ -9,7 +9,8 @@ public class Project1 {
 		System.out.println("Please select a mode:");
 		System.out.println("1. Naive vs. Naive");
 		System.out.println("2. Naive vs Thoughtful");
-		System.out.println("3. Thoughtful vs Thoughtful");
+		System.out.println("3. Thoughtful vs Naive");
+		System.out.println("4. Thoughtful vs Thoughtful");
 		
 		Scanner console = new Scanner(System.in);
 		System.out.print("Mode: ");
@@ -17,7 +18,7 @@ public class Project1 {
 		
 		Agent p1 = null;
 		Agent p2 = null;
-				
+		
 		if(input.equals("1"))
 		{
 			p1 = new NaiveAgent();
@@ -29,6 +30,11 @@ public class Project1 {
 			p2 = new ThoughtfulAgent(2);
 		}
 		else if(input.equals("3"))
+		{
+			p1 = new ThoughtfulAgent(1);
+			p2 = new NaiveAgent();
+		}
+		else if(input.equals("4"))
 		{
 			p1 = new ThoughtfulAgent(1);
 			p2 = new ThoughtfulAgent(2);

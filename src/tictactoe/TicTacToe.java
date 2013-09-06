@@ -142,7 +142,6 @@ public class TicTacToe {
 		{
 			return symbol[board[0][2]];
 		}
-
 		return null;		
 	}
 }
