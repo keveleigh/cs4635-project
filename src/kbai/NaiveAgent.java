@@ -5,27 +5,26 @@ import java.util.Random;
 
 public class NaiveAgent extends Agent{
 	private Random rand;
-	private int playerNum;
 	
-	public NaiveAgent(int playerNum)
+	public NaiveAgent()
 	{
 		rand = new Random();
-		this.playerNum = playerNum;
 	}
 	
 	public int nextMove(int[][] board)
 	{
 		ArrayList<Integer> open = new ArrayList<Integer>();
-		for(int j=0; j<board[0].length; j++)
+		for(int j=0; j<board.length; j++)
 		{
-			for(int i=0; i<board.length; i++)
+			for(int i=0; i<board[0].length; i++)
 			{
-				if(board[j][i] != 0)
+				if(board[j][i] == 0)
 				{
-					open.add(0);
+					open.add(j*3 + i);
 				}
 			}
 		}
-		return rand.nextInt(9);
+		int move = rand.nextInt(open.size());
+		return open.get(move);
 	}
 }

@@ -20,12 +20,12 @@ public class Project1 {
 				
 		if(input.equals("1"))
 		{
-			p1 = new NaiveAgent(1);
-			p2 = new NaiveAgent(2);
+			p1 = new NaiveAgent();
+			p2 = new NaiveAgent();
 		}
 		else if(input.equals("2"))
 		{
-			p1 = new NaiveAgent(1);
+			p1 = new NaiveAgent();
 			p2 = new ThoughtfulAgent(2);
 		}
 		else if(input.equals("3"))
@@ -41,16 +41,38 @@ public class Project1 {
 		
 		TicTacToe tt = new TicTacToe(p1, p2);
 
+		console.nextLine();
+		System.out.println("");
+
 		while(tt.noWinner())
 		{
-			tt.takeMove(1);
-			System.out.println("\nNext Turn:");
-			System.out.println(tt.printBoard());
+			if(tt.noWinner()){
+				tt.takeMove(1);
+				System.out.println("Next Turn:");
+				System.out.println(tt.printBoard());
+				System.out.println("Press enter to continue.");
+				console.nextLine();
+			}
+			if(tt.noWinner()){
+				tt.takeMove(2);
+				System.out.println("Next Turn:");
+				System.out.println(tt.printBoard());
+				System.out.println("Press enter to continue.");
+				console.nextLine();
+			}
 		}
 		
 		console.close();
 		
-		System.out.println("SOMETHING HAPPENED");
+		String winner = tt.getWinner();
+		
+		if(winner == null)
+		{
+			System.out.println("Nobody won.");
+		}
+		else{
+			System.out.println("Player " + winner + " won.");
+		}
 	}
 
 }
