@@ -21,7 +21,7 @@ public class ThoughtfulAgent extends Agent{
 		{
 			return 4;
 		}
-		
+				
 		int self = findTwos(playerNum, board);
 		if(self != -1)
 		{
@@ -44,6 +44,12 @@ public class ThoughtfulAgent extends Agent{
 			}
 		}
 		
+		int corn = findCorner(playerNum, board);
+		if(corn != -1)
+		{
+			return corn;
+		}
+		
 		ArrayList<Integer> open = new ArrayList<Integer>();
 		for(int j=0; j<board.length; j++)
 		{
@@ -59,6 +65,36 @@ public class ThoughtfulAgent extends Agent{
 		return open.get(move);
 	}
 	
+	private int findCorner(int playerNum, int[][] board) {
+		ArrayList<Integer> corners = new ArrayList<Integer>();
+		// Check the corners
+		if(board[0][0] == 0)
+		{
+			corners.add(0);
+		}
+		if(board[0][2] == 0)
+		{
+			corners.add(2);
+		}
+		if(board[2][0] == 0)
+		{
+			corners.add(6);
+		}
+		if(board[2][2] == 0)
+		{
+			corners.add(8);
+		}
+		
+		if(corners.size() > 0)
+		{
+			return corners.get(rand.nextInt(corners.size()));
+		}
+		else
+		{
+			return -1;
+		}
+	}
+
 	private int findTwos(int playerNum, int[][] board)
 	{
 		// Horizontals
