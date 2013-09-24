@@ -80,5 +80,4 @@ public class Project1 {
 			System.out.println("Player " + winner + " won.");
 		}
 	}
-
 }
