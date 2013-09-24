@@ -7,6 +7,7 @@ public class NaiveAgent extends Agent{
 	
 	private Random rand;
 	private boolean moveLegality;
+	private boolean isMyTurn;
 	
 	public NaiveAgent()
 	{
@@ -16,6 +17,7 @@ public class NaiveAgent extends Agent{
 	
 	public int nextMove(int[][] board)
 	{
+		isMyTurn = true;
 		ArrayList<Integer> open = new ArrayList<Integer>();
 		for(int j=0; j<board.length; j++)
 		{
@@ -32,6 +34,7 @@ public class NaiveAgent extends Agent{
 			moveLegality = true;
 		}
 		printDomainKnowledge(board);
+		isMyTurn = false;
 		return open.get(move);
 	}
 
@@ -45,8 +48,10 @@ public class NaiveAgent extends Agent{
 				}
 			}
 		}
-		System.out.println("Checking domain knowledge...");
-		System.out.println("Number of open spaces before move: " + openSpaces);
-		System.out.println("Is my move legal? " + moveLegality + "\n");
+		System.out.println("Checking domain knowledge (all before move)...");
+		System.out.println("Number of open spaces: " + openSpaces);
+		System.out.println("Is my move legal? " + moveLegality);
+		System.out.println("Is it my turn? " + isMyTurn);
+		System.out.println("Is the game over? " + false + "\n");
 	}
 }

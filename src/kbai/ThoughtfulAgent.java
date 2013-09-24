@@ -8,6 +8,7 @@ public class ThoughtfulAgent extends Agent{
 	private Random rand;
 	private int playerNum;
 	private boolean moveLegality;
+	private boolean isMyTurn;
 	
 	public ThoughtfulAgent(int playerNum)
 	{
@@ -17,6 +18,7 @@ public class ThoughtfulAgent extends Agent{
 	
 	public int nextMove(int[][] board)
 	{
+		isMyTurn = true;
 		// Middle
 		if(board[1][1] == 0)
 		{
@@ -77,6 +79,7 @@ public class ThoughtfulAgent extends Agent{
 			moveLegality = true;
 		}
 		printDomainKnowledge(board);
+		isMyTurn = false;
 		return open.get(move);
 	}
 	
@@ -231,12 +234,14 @@ public class ThoughtfulAgent extends Agent{
 		
 		int openCorners = openCorners(board);
 		boolean openTwos = openTwos(playerNum, board);
-		System.out.println("Checking domain knowledge...");
-		System.out.println("Is the middle open before move? " + openMiddle);
-		System.out.println("Number of open spaces before move: " + openSpaces);
-		System.out.println("Number of open corners before move: " + openCorners);
+		System.out.println("Checking domain knowledge (all before move)...");
+		System.out.println("Is the middle open? " + openMiddle);
+		System.out.println("Number of open spaces: " + openSpaces);
+		System.out.println("Number of open corners: " + openCorners);
 		System.out.println("Is there an open spot for the win? " + openTwos);
-		System.out.println("Is my move legal? " + moveLegality + "\n");
+		System.out.println("Is my move legal? " + moveLegality);
+		System.out.println("Is it my turn? " + isMyTurn);
+		System.out.println("Is the game over? " + false + "\n");
 	}
 	
 	private int openCorners(int[][] board){
