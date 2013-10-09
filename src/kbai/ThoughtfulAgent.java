@@ -7,6 +7,8 @@ public class ThoughtfulAgent extends Agent{
 	
 	private Random rand;
 	private int playerNum;
+	private boolean moveLegality;
+	private boolean isMyTurn;
 	
 	public ThoughtfulAgent(int playerNum)
 	{
@@ -15,16 +17,21 @@ public class ThoughtfulAgent extends Agent{
 	}
 	
 	public int nextMove(int[][] board)
-	{	
+	{
+		isMyTurn = true;
 		// Middle
 		if(board[1][1] == 0)
 		{
+			moveLegality = true;
+			printDomainKnowledge(board);
 			return 4;
 		}
 				
 		int self = findTwos(playerNum, board);
 		if(self != -1)
 		{
+			moveLegality = true;
+			printDomainKnowledge(board);
 			return self;
 		}
 		if(playerNum == 1)
@@ -32,6 +39,8 @@ public class ThoughtfulAgent extends Agent{
 			int opp = findTwos(2, board);
 			if(opp != -1)
 			{
+				moveLegality = true;
+				printDomainKnowledge(board);
 				return opp;
 			}
 		}
@@ -40,6 +49,8 @@ public class ThoughtfulAgent extends Agent{
 			int opp = findTwos(1, board);
 			if(opp != -1)
 			{
+				moveLegality = true;
+				printDomainKnowledge(board);
 				return opp;
 			}
 		}
@@ -47,6 +58,8 @@ public class ThoughtfulAgent extends Agent{
 		int corn = findCorner(playerNum, board);
 		if(corn != -1)
 		{
+			moveLegality = true;
+			printDomainKnowledge(board);
 			return corn;
 		}
 		
@@ -62,6 +75,11 @@ public class ThoughtfulAgent extends Agent{
 			}
 		}
 		int move = rand.nextInt(open.size());
+		if(open.size() > 0){
+			moveLegality = true;
+		}
+		printDomainKnowledge(board);
+		isMyTurn = false;
 		return open.get(move);
 	}
 	
@@ -84,7 +102,7 @@ public class ThoughtfulAgent extends Agent{
 		{
 			corners.add(8);
 		}
-		
+
 		if(corners.size() > 0)
 		{
 			return corners.get(rand.nextInt(corners.size()));
@@ -197,5 +215,158 @@ public class ThoughtfulAgent extends Agent{
 			return 6;
 		}	
 		return -1;
+	}
+
+	@Override
+	public void printDomainKnowledge(int[][] board) {
+		int openSpaces = 0;
+		for(int i=0; i<3; i++){
+			for(int j=0; j<3; j++){
+				if(board[i][j] == 0){
+					openSpaces++;
+				}
+			}
+		}
+		
+		boolean openMiddle = false;
+		if(board[1][1] == 0){
+			openMiddle = true;
+		}
+		
+		int openCorners = openCorners(board);
+		boolean openTwos = openTwos(playerNum, board);
+		System.out.println("Checking domain knowledge (all before move)...");
+		System.out.println("Is the middle open? " + openMiddle);
+		System.out.println("Number of open spaces: " + openSpaces);
+		System.out.println("Number of open corners: " + openCorners);
+		System.out.println("Is there an open spot for the win? " + openTwos);
+		System.out.println("Is my move legal? " + moveLegality);
+		System.out.println("Is it my turn? " + isMyTurn);
+		System.out.println("Is the game over? " + false + "\n");
+	}
+	
+	private int openCorners(int[][] board){
+		int openCorners = 0;
+		if(board[0][0] == 0)
+		{
+			openCorners++;
+		}
+		if(board[0][2] == 0)
+		{
+			openCorners++;
+		}
+		if(board[2][0] == 0)
+		{
+			openCorners++;
+		}
+		if(board[2][2] == 0)
+		{
+			openCorners++;
+		}
+		return openCorners;
+	}
+	
+	private boolean openTwos(int playerNum, int[][] board)
+	{
+		// Horizontals
+		if(board[0][0] == 0 && board[0][1] == playerNum && board[0][2] == playerNum)
+		{
+			return true;
+		}
+		if(board[0][0] == playerNum && board[0][1] == 0 && board[0][2] == playerNum)
+		{
+			return true;
+		}
+		if(board[0][0] == playerNum && board[0][1] == playerNum && board[0][2] == 0)
+		{
+			return true;
+		}
+		if(board[1][0] == 0 && board[1][1] == playerNum && board[1][2] == playerNum)
+		{
+			return true;
+		}
+		if(board[1][0] == playerNum && board[1][1] == 0 && board[1][2] == playerNum)
+		{
+			return true;
+		}
+		if(board[1][0] == playerNum && board[1][1] == playerNum && board[1][2] == 0)
+		{
+			return true;
+		}
+		if(board[2][0] == 0 && board[2][1] == playerNum && board[2][2] == playerNum)
+		{
+			return true;
+		}
+		if(board[2][0] == playerNum && board[2][1] == 0 && board[2][2] == playerNum)
+		{
+			return true;
+		}
+		if(board[2][0] == playerNum && board[2][1] == playerNum && board[2][2] == 0)
+		{
+			return true;
+		}
+		// Verticals
+		if(board[0][0] == 0 && board[1][0] == playerNum && board[2][0] == playerNum)
+		{
+			return true;
+		}
+		if(board[0][0] == playerNum && board[1][0] == 0 && board[2][0] == playerNum)
+		{
+			return true;
+		}
+		if(board[0][0] == playerNum && board[1][0] == playerNum && board[2][0] == 0)
+		{
+			return true;
+		}
+		if(board[0][1] == 0 && board[1][1] == playerNum && board[2][1] == playerNum)
+		{
+			return true;
+		}
+		if(board[0][1] == playerNum && board[1][1] == 0 && board[2][1] == playerNum)
+		{
+			return true;
+		}
+		if(board[0][1] == playerNum && board[1][1] == playerNum && board[2][1] == 0)
+		{
+			return true;
+		}
+		if(board[0][2] == 0 && board[1][2] == playerNum && board[2][2] == playerNum)
+		{
+			return true;
+		}
+		if(board[0][2] == playerNum && board[1][2] == 0 && board[2][2] == playerNum)
+		{
+			return true;
+		}
+		if(board[0][2] == playerNum && board[1][2] == playerNum && board[2][2] == 0)
+		{
+			return true;
+		}
+		// Diagonals
+		if(board[0][0] == 0 && board[1][1] == playerNum && board[2][2] == playerNum)
+		{
+			return true;
+		}
+		if(board[0][0] == playerNum && board[1][1] == 0 && board[2][2] == playerNum)
+		{
+			return true;
+		}
+		if(board[0][0] == playerNum && board[1][1] == playerNum && board[2][2] == 0)
+		{
+			return true;
+		}
+		if(board[0][2] == 0 && board[1][1] == playerNum && board[2][0] == playerNum)
+		{
+			return true;
+		}
+		if(board[0][2] == playerNum && board[1][1] == 0 && board[2][0] == playerNum)
+		{
+			return true;
+		}
+		if(board[0][2] == playerNum && board[1][1] == playerNum && board[2][0] == 0)
+		{
+			return true;
+		}	
+		return false;
 	}
 }

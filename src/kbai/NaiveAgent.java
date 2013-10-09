@@ -6,14 +6,18 @@ import java.util.Random;
 public class NaiveAgent extends Agent{
 	
 	private Random rand;
+	private boolean moveLegality;
+	private boolean isMyTurn;
 	
 	public NaiveAgent()
 	{
 		rand = new Random();
+		moveLegality = false;
 	}
 	
 	public int nextMove(int[][] board)
 	{
+		isMyTurn = true;
 		ArrayList<Integer> open = new ArrayList<Integer>();
 		for(int j=0; j<board.length; j++)
 		{
@@ -26,6 +30,28 @@ public class NaiveAgent extends Agent{
 			}
 		}
 		int move = rand.nextInt(open.size());
+		if(open.size() > 0){
+			moveLegality = true;
+		}
+		printDomainKnowledge(board);
+		isMyTurn = false;
 		return open.get(move);
+	}
+
+	@Override
+	public void printDomainKnowledge(int[][] board) {
+		int openSpaces = 0;
+		for(int i=0; i<3; i++){
+			for(int j=0; j<3; j++){
+				if(board[i][j] == 0){
+					openSpaces++;
+				}
+			}
+		}
+		System.out.println("Checking domain knowledge (all before move)...");
+		System.out.println("Number of open spaces: " + openSpaces);
+		System.out.println("Is my move legal? " + moveLegality);
+		System.out.println("Is it my turn? " + isMyTurn);
+		System.out.println("Is the game over? " + false + "\n");
 	}
 }
