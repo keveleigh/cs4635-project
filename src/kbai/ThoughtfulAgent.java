@@ -248,11 +248,11 @@ public class ThoughtfulAgent extends Agent{
 		System.out.println("Domain: Number of open spaces: " + openSpaces);
 		System.out.println("Domain: Is my move legal? " + moveLegality);
 		System.out.println("Domain: Is it my turn? " + isMyTurn);
-		System.out.println("Domain: Is the game over? " + false + "\n");
+		System.out.println("Domain: Is the game over? " + false);
 		System.out.println("Strategic: Is the middle open for a good start? " + openMiddle);
 		System.out.println("Strategic: Number of open corners for a good move: " + openCorners);
 		System.out.println("Strategic: Is there an open spot for the win? " + openTwos);
-		System.out.println("Strategic: Is there a spot to block opp's win? " + blockTwos);
+		System.out.println("Strategic: Is there a spot to block opp's win? " + blockTwos + "\n");
 	}
 	
 	private int openCorners(int[][] board){
