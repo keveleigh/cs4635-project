@@ -48,10 +48,10 @@ public class NaiveAgent extends Agent{
 				}
 			}
 		}
-		System.out.println("Checking domain knowledge (all before move)...");
-		System.out.println("Number of open spaces: " + openSpaces);
-		System.out.println("Is my move legal? " + moveLegality);
-		System.out.println("Is it my turn? " + isMyTurn);
-		System.out.println("Is the game over? " + false + "\n");
+		System.out.println("Checking knowledge (naive)...");
+		System.out.println("Domain: Number of open spaces: " + openSpaces);
+		System.out.println("Domain: Is my move legal? " + moveLegality);
+		System.out.println("Domain: Is it my turn? " + isMyTurn);
+		System.out.println("Domain: Is the game over? " + false + "\n");
 	}
 }

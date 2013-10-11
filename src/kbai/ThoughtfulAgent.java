@@ -235,14 +235,24 @@ public class ThoughtfulAgent extends Agent{
 		
 		int openCorners = openCorners(board);
 		boolean openTwos = openTwos(playerNum, board);
-		System.out.println("Checking domain knowledge (all before move)...");
-		System.out.println("Is the middle open? " + openMiddle);
-		System.out.println("Number of open spaces: " + openSpaces);
-		System.out.println("Number of open corners: " + openCorners);
-		System.out.println("Is there an open spot for the win? " + openTwos);
-		System.out.println("Is my move legal? " + moveLegality);
-		System.out.println("Is it my turn? " + isMyTurn);
-		System.out.println("Is the game over? " + false + "\n");
+		boolean blockTwos;
+		if(playerNum == 1)
+		{
+			blockTwos = openTwos(2, board);
+		}
+		else
+		{
+			blockTwos = openTwos(1, board);
+		}
+		System.out.println("Checking knowledge (thoughtful)...");
+		System.out.println("Domain: Number of open spaces: " + openSpaces);
+		System.out.println("Domain: Is my move legal? " + moveLegality);
+		System.out.println("Domain: Is it my turn? " + isMyTurn);
+		System.out.println("Domain: Is the game over? " + false + "\n");
+		System.out.println("Strategic: Is the middle open for a good start? " + openMiddle);
+		System.out.println("Strategic: Number of open corners for a good move: " + openCorners);
+		System.out.println("Strategic: Is there an open spot for the win? " + openTwos);
+		System.out.println("Strategic: Is there a spot to block opp's win? " + blockTwos);
 	}
 	
 	private int openCorners(int[][] board){
