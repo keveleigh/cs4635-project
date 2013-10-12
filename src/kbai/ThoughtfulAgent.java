@@ -3,6 +3,8 @@ package kbai;
 import java.util.ArrayList;
 import java.util.Random;
 
+import tictactoe.TicTacToe;
+
 public class ThoughtfulAgent extends Agent{
 	
 	private Random rand;
@@ -244,15 +246,15 @@ public class ThoughtfulAgent extends Agent{
 		{
 			blockTwos = openTwos(1, board);
 		}
-		System.out.println("Checking knowledge (thoughtful)...");
-		System.out.println("Domain: Number of open spaces: " + openSpaces);
-		System.out.println("Domain: Is my move legal? " + moveLegality);
-		System.out.println("Domain: Is it my turn? " + isMyTurn);
-		System.out.println("Domain: Is the game over? " + false);
-		System.out.println("Strategic: Is the middle open for a good start? " + openMiddle);
-		System.out.println("Strategic: Number of open corners for a good move: " + openCorners);
-		System.out.println("Strategic: Is there an open spot for the win? " + openTwos);
-		System.out.println("Strategic: Is there a spot to block opp's win? " + blockTwos + "\n");
+		TicTacToe.trace += "Checking knowledge (thoughtful)...\n";
+		TicTacToe.trace += "Domain: Number of open spaces: " + openSpaces + "\n";
+		TicTacToe.trace += "Domain: Is my move legal? " + moveLegality + "\n";
+		TicTacToe.trace += "Domain: Is it my turn? " + isMyTurn + "\n";
+		TicTacToe.trace += "Domain: Is the game over? " + false + "\n";
+		TicTacToe.trace += "Strategic: Is the middle open for a good start? " + openMiddle + "\n";
+		TicTacToe.trace += "Strategic: Number of open corners for a good move: " + openCorners + "\n";
+		TicTacToe.trace += "Strategic: Is there an open spot for the win? " + openTwos + "\n";
+		TicTacToe.trace += "Strategic: Is there a spot to block opp's win? " + blockTwos + "\n\n";
 	}
 	
 	private int openCorners(int[][] board){

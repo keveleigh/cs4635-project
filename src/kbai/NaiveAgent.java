@@ -3,6 +3,8 @@ package kbai;
 import java.util.ArrayList;
 import java.util.Random;
 
+import tictactoe.TicTacToe;
+
 public class NaiveAgent extends Agent{
 	
 	private Random rand;
@@ -48,10 +50,10 @@ public class NaiveAgent extends Agent{
 				}
 			}
 		}
-		System.out.println("Checking knowledge (naive)...");
-		System.out.println("Domain: Number of open spaces: " + openSpaces);
-		System.out.println("Domain: Is my move legal? " + moveLegality);
-		System.out.println("Domain: Is it my turn? " + isMyTurn);
-		System.out.println("Domain: Is the game over? " + false + "\n");
+		TicTacToe.trace += "Checking knowledge (naive)...\n";
+		TicTacToe.trace += "Domain: Number of open spaces: " + openSpaces + "\n";
+		TicTacToe.trace += "Domain: Is my move legal? " + moveLegality + "\n";
+		TicTacToe.trace += "Domain: Is it my turn? " + isMyTurn + "\n";
+		TicTacToe.trace += "Domain: Is the game over? " + false + "\n\n";
 	}
 }

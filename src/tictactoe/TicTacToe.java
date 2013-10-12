@@ -8,6 +8,7 @@ public class TicTacToe {
 	private Agent p1;
 	private Agent p2;
 	private String[] symbol;
+	public static String trace;
 	
 	public TicTacToe(Agent p1, Agent p2)
 	{
@@ -18,6 +19,7 @@ public class TicTacToe {
 		symbol[0] = " ";
 		symbol[1] = "X";
 		symbol[2] = "O";
+		trace = "";
 	}
 	
 	public void takeMove(int player)
@@ -110,6 +112,8 @@ public class TicTacToe {
 	
 	public String getWinner()
 	{
+		System.out.println(trace);
+		
 		if(board[0][0] != 0 && board[0][0] == board[0][1] && board[0][1] == board[0][2])
 		{
 			return symbol[board[0][0]];
