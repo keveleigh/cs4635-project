@@ -27,11 +27,13 @@ public class TicTacToe {
 		if(player == 1)
 		{
 			int move = p1.nextMove(board);
+			p1.moves.add(move);
 			board[move/3][move%3] = 1;
 		}
 		else if(player == 2)
 		{
 			int move = p2.nextMove(board);
+			p2.moves.add(move);
 			board[move/3][move%3] = 2;
 		}
 	}
@@ -111,9 +113,7 @@ public class TicTacToe {
 	}
 	
 	public String getWinner()
-	{
-		System.out.println(trace);
-		
+	{		
 		if(board[0][0] != 0 && board[0][0] == board[0][1] && board[0][1] == board[0][2])
 		{
 			return symbol[board[0][0]];

@@ -15,6 +15,8 @@ public class NaiveAgent extends Agent{
 	{
 		rand = new Random();
 		moveLegality = false;
+		moves = new ArrayList<Integer>();
+		reasons = new ArrayList<String>();
 	}
 	
 	public int nextMove(int[][] board)
@@ -37,6 +39,7 @@ public class NaiveAgent extends Agent{
 		}
 		printDomainKnowledge(board);
 		isMyTurn = false;
+		reasons.add("the space was open, the move was legal, and it was its turn.");
 		return open.get(move);
 	}
 

@@ -16,6 +16,8 @@ public class ThoughtfulAgent extends Agent{
 	{
 		rand = new Random();
 		this.playerNum = playerNum;
+		moves = new ArrayList<Integer>();
+		reasons = new ArrayList<String>();
 	}
 	
 	public int nextMove(int[][] board)
@@ -26,6 +28,7 @@ public class ThoughtfulAgent extends Agent{
 		{
 			moveLegality = true;
 			printDomainKnowledge(board);
+			reasons.add("the middle of the board was open.");
 			return 4;
 		}
 				
@@ -34,6 +37,7 @@ public class ThoughtfulAgent extends Agent{
 		{
 			moveLegality = true;
 			printDomainKnowledge(board);
+			reasons.add("there were two spots in a row, and it could take the win in the third spot.");
 			return self;
 		}
 		if(playerNum == 1)
@@ -43,6 +47,7 @@ public class ThoughtfulAgent extends Agent{
 			{
 				moveLegality = true;
 				printDomainKnowledge(board);
+				reasons.add("the opponent had two spots in a row, so it had to block.");
 				return opp;
 			}
 		}
@@ -53,6 +58,7 @@ public class ThoughtfulAgent extends Agent{
 			{
 				moveLegality = true;
 				printDomainKnowledge(board);
+				reasons.add("the opponent had two spots in a row, so it had to block.");
 				return opp;
 			}
 		}
@@ -62,6 +68,7 @@ public class ThoughtfulAgent extends Agent{
 		{
 			moveLegality = true;
 			printDomainKnowledge(board);
+			reasons.add("there was a corner open, which was the best move.");
 			return corn;
 		}
 		
@@ -82,6 +89,7 @@ public class ThoughtfulAgent extends Agent{
 		}
 		printDomainKnowledge(board);
 		isMyTurn = false;
+		reasons.add("the space was open, the move was legal, and it was its turn.");
 		return open.get(move);
 	}
 	
